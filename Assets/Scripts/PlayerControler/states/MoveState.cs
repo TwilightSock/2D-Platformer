@@ -21,10 +21,10 @@ public class MoveState : State
         {
             character.currentState = character.jumpState;
         }
-        else if (!character.CheckIsGrouded(character.boxCollider2D)) 
+       /* else if (!character.CheckIsGrouded(character.boxCollider2D)) 
         {
             character.currentState = character.jumpState;
-        }
+        }*/
         else if (character.health == 0 || character.health < 0)
         {
             character.currentState = character.dieState;
