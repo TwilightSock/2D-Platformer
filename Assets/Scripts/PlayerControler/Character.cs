@@ -2,21 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Character : MonoBehaviour
 {
     [SerializeField]
-    private LayerMask layerMask;
+    private LayerMask jumpableGround;
     public Animator animator { get; private set; }
     public Rigidbody2D rigidbody { get; private set; }
     public BoxCollider2D boxCollider2D { get; private set; }
+    
     public float moveSpeed { get; } = 250.0f;
     public float jumpForce { get; } = 10.0f;
     public int health { get; set; } = 1;
-
     #region
     public State currentState { get; set; }
+
     public State moveState { get; } = new MoveState();
     public State jumpState { get; } = new JumpState();
+   // public State fallState { get; } = new FallState();
     public State dieState { get; } = new DieState();
     #endregion
 
@@ -29,7 +32,7 @@ public class Character : MonoBehaviour
     }
 
     private void Update()
-    {
+    {       
        currentState.HandleInput(this);
        currentState.LogicUpdate(this);
        currentState.UpdateState(this);
@@ -41,32 +44,42 @@ public class Character : MonoBehaviour
     }
     public void MovePlayer(float playerSpeed)
     {
+        bool isMoving = false;
         if (!Mathf.Approximately(playerSpeed, 0))
         {
+            isMoving = true;
             transform.localScale = new Vector3(Mathf.Sign(playerSpeed), 1, 1);
         }
         rigidbody.velocity = new Vector2(playerSpeed *moveSpeed* Time.deltaTime, rigidbody.velocity.y);
         
-        animator.SetFloat("moving", Mathf.Abs(playerSpeed));
+        animator.SetBool("isMoving", isMoving);
     }
 
-    public void jumpPlayer()
+    public void JumpPlayer(bool isGrounded)
+    {       
+       rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+       InAir(isGrounded);
+    }
+
+    public void InAir(bool inAir) 
     {
-        bool isGrounded = CheckIsGrouded(boxCollider2D);
-        Debug.Log(isGrounded);
-        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
-        {
-            rigidbody.velocity = new Vector2(rigidbody.velocity.x, 1 * jumpForce);
-            //rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        }
-
-        animator.SetTrigger("jump");
+       animator.SetBool("isJumping", inAir);
     }
-
+  
     public bool CheckIsGrouded(BoxCollider2D boxCollider)
     {
-        RaycastHit2D raycastHit2D = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down * .1f,6);
-        Debug.Log(raycastHit2D.collider);
-        return raycastHit2D.collider != null;
+        RaycastHit2D raycastHit2D = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down,1,jumpableGround);
+        if (raycastHit2D.collider != null)
+        {
+            Debug.Log("true");
+            return true;
+        }
+        else 
+        {
+            Debug.Log("false");
+            return false;
+        }
+ 
     }
+
 }

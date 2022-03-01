@@ -8,6 +8,7 @@ public class MoveState : State
 
     private float horizontalInput;
     private bool jump;
+
     public override void HandleInput(Character character)
     {
         horizontalInput = Input.GetAxis("Horizontal");
@@ -16,23 +17,23 @@ public class MoveState : State
 
     public override void LogicUpdate(Character character)
     {
-        if (jump) 
+        if (jump)
         {
             character.currentState = character.jumpState;
         }
-    }
-    public override void UpdateState(Character character)
-    {
+        else if (!character.CheckIsGrouded(character.boxCollider2D)) 
+        {
+            character.currentState = character.jumpState;
+        }
+        else if (character.health == 0 || character.health < 0)
+        {
+            character.currentState = character.dieState;
+        }
         
     }
-
 
     public override void PhysicsUpdateState(Character character)
     {
         character.MovePlayer(horizontalInput);
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            character.currentState = character.jumpState;
-        }
     }
 }

@@ -1,26 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DieState : State
-{
-    public override void HandleInput(Character character)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void LogicUpdate(Character character)
-    {
-        throw new System.NotImplementedException();
-    }
-
+{  
     public override void UpdateState(Character character)
     {
-        
-    }
-
-    public override void PhysicsUpdateState(Character character)
-    {
-        
+        character.animator.SetTrigger("isDying");
     }
 }
