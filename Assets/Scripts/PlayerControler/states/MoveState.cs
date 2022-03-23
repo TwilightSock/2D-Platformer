@@ -17,17 +17,13 @@ public class MoveState : State
 
     public override void LogicUpdate(Character character)
     {
-        if (jump)
+        if (jump && character.CheckIsGrouded(character.boxCollider2D))
         {
-            character.currentState = character.jumpState;
+            character.InitiaizeState(character.jumpState);
         }
-       /* else if (!character.CheckIsGrouded(character.boxCollider2D)) 
-        {
-            character.currentState = character.jumpState;
-        }*/
         else if (character.health == 0 || character.health < 0)
         {
-            character.currentState = character.dieState;
+            character.InitiaizeState(character.dieState);
         }
         
     }
@@ -36,4 +32,5 @@ public class MoveState : State
     {
         character.MovePlayer(horizontalInput);
     }
+
 }

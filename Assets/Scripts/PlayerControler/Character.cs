@@ -19,7 +19,6 @@ public class Character : MonoBehaviour
 
     public State moveState { get; } = new MoveState();
     public State jumpState { get; } = new JumpState();
-   // public State fallState { get; } = new FallState();
     public State dieState { get; } = new DieState();
     #endregion
 
@@ -32,7 +31,7 @@ public class Character : MonoBehaviour
     }
 
     private void Update()
-    {       
+    {
        currentState.HandleInput(this);
        currentState.LogicUpdate(this);
        currentState.UpdateState(this);
@@ -55,31 +54,49 @@ public class Character : MonoBehaviour
         animator.SetBool("isMoving", isMoving);
     }
 
-    public void JumpPlayer(bool isGrounded)
+    public void JumpPlayer()
     {       
-       rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-       InAir(isGrounded);
+        rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        animator.SetBool("IsJumping",true);
     }
 
-    public void InAir(bool inAir) 
+   /* public void InAir(bool inAir) 
     {
        animator.SetBool("isJumping", inAir);
-    }
+    }*/
   
     public bool CheckIsGrouded(BoxCollider2D boxCollider)
     {
-        RaycastHit2D raycastHit2D = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down,1,jumpableGround);
+
+      /*  RaycastHit2D raycastHit2D = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, 0.01f, jumpableGround);
         if (raycastHit2D.collider != null)
         {
             Debug.Log("true");
             return true;
         }
-        else 
+        else
         {
             Debug.Log("false");
             return false;
         }
- 
+*/
+        List<Collider2D> colliders = new List<Collider2D>(Physics2D.OverlapBoxAll(boxCollider.bounds.center, boxCollider.bounds.size, 0f, jumpableGround));
+
+        if (colliders.Count > 0)
+        {
+            Debug.Log("true");
+            return true;
+        }
+        else
+        {
+            Debug.Log("false");
+            return false;
+        }
     }
 
+    public void InitiaizeState(State state) 
+    {
+        currentState = state;
+        state.Enter(this);
+    }
 }

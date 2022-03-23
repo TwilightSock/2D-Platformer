@@ -4,9 +4,13 @@ using UnityEngine;
 
 public abstract class State
 {  
-    public virtual void HandleInput(Character character) 
+    public virtual void Enter(Character character) 
     {
     
+    }
+    public virtual void HandleInput(Character character) 
+    {
+        
     }
     public virtual void LogicUpdate(Character character) 
     {

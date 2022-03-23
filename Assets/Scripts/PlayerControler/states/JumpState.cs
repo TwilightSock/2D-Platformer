@@ -6,31 +6,30 @@ public class JumpState : State
 {
     private bool grounded;
     private bool jump;
-    public override void HandleInput(Character character)
-    {   
-        grounded = character.CheckIsGrouded(character.boxCollider2D);
+    public override void Enter(Character character)
+    {
+        grounded = false;
         jump = Input.GetButtonDown("Jump");
+        character.JumpPlayer();
     }
 
     public override void LogicUpdate(Character character)
     {
         if (grounded)
         {
-            character.currentState = character.moveState;
+            character.animator.SetBool("IsJumpuing", false);
+            character.InitiaizeState(character.moveState);
         }
         
         else if (character.health == 0 || character.health < 0) 
         {
-            character.currentState = character.dieState;
+            character.InitiaizeState(character.dieState);
         }
     }
-    public override void UpdateState(Character character)
-    {
-        if (jump)
-        {
-            character.JumpPlayer(grounded);
-        }
 
+    public override void PhysicsUpdateState(Character character)
+    {
+        grounded = character.CheckIsGrouded(character.boxCollider2D);
     }
 
 }

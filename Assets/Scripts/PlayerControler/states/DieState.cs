@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class DieState : State
 {  
-    public override void UpdateState(Character character)
+    public override void Enter(Character character)
     {
         character.animator.SetTrigger("isDying");
     }
