@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class JumpState : State
@@ -17,7 +18,7 @@ public class JumpState : State
     {
         if (grounded)
         {
-            character.animator.SetBool("IsJumpuing", false);
+            character.animator.SetBool("isJumping", false);
             character.InitiaizeState(character.moveState);
         }
         
@@ -27,9 +28,26 @@ public class JumpState : State
         }
     }
 
-    public override void PhysicsUpdateState(Character character)
+    public override void UpdateState(Character character)
+    {
+        if (character.rigidbody.velocity.y > 0)
+        {
+            Task task = new Task(async () =>
+            {
+                await Task.Delay(40);
+                CheckGround(character);
+            });
+            task.Start();
+        }
+        else
+        {
+            CheckGround(character);
+        }
+
+    }
+
+    private void CheckGround(Character character)
     {
         grounded = character.CheckIsGrouded(character.boxCollider2D);
     }
-
 }

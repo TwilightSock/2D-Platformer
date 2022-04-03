@@ -57,41 +57,17 @@ public class Character : MonoBehaviour
     public void JumpPlayer()
     {       
         rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        animator.SetBool("IsJumping",true);
+        animator.SetBool("isJumping",true);
     }
 
-   /* public void InAir(bool inAir) 
-    {
-       animator.SetBool("isJumping", inAir);
-    }*/
-  
     public bool CheckIsGrouded(BoxCollider2D boxCollider)
     {
-
-      /*  RaycastHit2D raycastHit2D = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, 0.01f, jumpableGround);
-        if (raycastHit2D.collider != null)
-        {
-            Debug.Log("true");
-            return true;
-        }
-        else
-        {
-            Debug.Log("false");
-            return false;
-        }
-*/
-        List<Collider2D> colliders = new List<Collider2D>(Physics2D.OverlapBoxAll(boxCollider.bounds.center, boxCollider.bounds.size, 0f, jumpableGround));
-
-        if (colliders.Count > 0)
-        {
-            Debug.Log("true");
-            return true;
-        }
-        else
-        {
-            Debug.Log("false");
-            return false;
-        }
+        List<ContactPoint2D> contacts = new List<ContactPoint2D>();
+        ContactFilter2D contactFilter2D = new ContactFilter2D();
+        contactFilter2D.SetLayerMask(jumpableGround);
+        bool isGrounded = boxCollider2D.GetContacts(contactFilter2D, contacts) > 0;
+        Debug.Log($"Is grounded: {isGrounded}"); 
+        return isGrounded;
     }
 
     public void InitiaizeState(State state) 
