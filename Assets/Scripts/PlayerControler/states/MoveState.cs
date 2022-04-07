@@ -4,33 +4,32 @@ using UnityEngine;
 
 public class MoveState : State
 {
-    private float speed;
-
-    private float horizontalInput;
-    private bool jump;
-
-    public override void HandleInput(Character character)
+    public MoveState(StateMachine stateMachine, Character character) : base(stateMachine,character)
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-        jump = Input.GetButtonDown("Jump");
+
     }
 
-    public override void LogicUpdate(Character character)
-    {
-        if (jump && character.CheckIsGrouded(character.boxCollider2D))
+    public override void Update()
+    { 
+        if (character.health == 0 || character.health < 0)
         {
-            character.InitiaizeState(character.jumpState);
+            stateMachine.InitializeState(character.dieState);
         }
-        else if (character.health == 0 || character.health < 0)
-        {
-            character.InitiaizeState(character.dieState);
-        }
-        
+
     }
 
-    public override void PhysicsUpdateState(Character character)
+    public override void Jump()
     {
-        character.MovePlayer(horizontalInput);
+        if (Input.GetButtonDown("Jump") && stateMachine.CheckGround())
+        {
+            stateMachine.InitializeState(character.jumpState);
+        }
+
+    }
+
+    public override void Move()
+    {
+        stateMachine.InputMove();
     }
 
 }

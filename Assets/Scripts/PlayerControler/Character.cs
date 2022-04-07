@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using UnityEngine;
 
 
@@ -16,10 +17,11 @@ public class Character : MonoBehaviour
     public int health { get; set; } = 1;
     #region
     public State currentState { get; set; }
+    public StateMachine stateMachine { get; private set; }
 
-    public State moveState { get; } = new MoveState();
-    public State jumpState { get; } = new JumpState();
-    public State dieState { get; } = new DieState();
+    public State moveState { get; private set; } 
+    public State jumpState { get; private set; } 
+    public State dieState { get; private set; } 
     #endregion
 
     void Awake()
@@ -27,20 +29,25 @@ public class Character : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
+        stateMachine = new StateMachine(this);
+        moveState  = new MoveState(stateMachine,this);
+        jumpState  = new JumpState(stateMachine,this);
+        dieState  = new DieState(stateMachine,this);
         currentState = moveState;
     }
 
     private void Update()
     {
-       currentState.HandleInput(this);
-       currentState.LogicUpdate(this);
-       currentState.UpdateState(this);
+       currentState.Update();
+       currentState.Jump();
        
     }
-    public void FixedUpdate()
+
+    private void FixedUpdate()
     {
-        currentState.PhysicsUpdateState(this);
+        currentState.Move();
     }
+
     public void MovePlayer(float playerSpeed)
     {
         bool isMoving = false;
@@ -55,12 +62,12 @@ public class Character : MonoBehaviour
     }
 
     public void JumpPlayer()
-    {       
+    {
         rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        animator.SetBool("isJumping",true);
+        animator.SetBool("isJumping", true);
     }
 
-    public bool CheckIsGrouded(BoxCollider2D boxCollider)
+    public bool CheckIsGrounded(BoxCollider2D boxCollider)
     {
         List<ContactPoint2D> contacts = new List<ContactPoint2D>();
         ContactFilter2D contactFilter2D = new ContactFilter2D();
@@ -70,9 +77,9 @@ public class Character : MonoBehaviour
         return isGrounded;
     }
 
-    public void InitiaizeState(State state) 
+    public void InitializeState(State state) 
     {
         currentState = state;
-        state.Enter(this);
+        state.Enter();
     }
 }

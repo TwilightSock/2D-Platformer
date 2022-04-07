@@ -3,25 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class State
-{  
-    public virtual void Enter(Character character) 
+{
+    protected StateMachine stateMachine;
+    protected Character character;
+    public State(StateMachine stateMachine,Character character)
     {
-    
+        this.stateMachine = stateMachine;
+        this.character = character;
     }
-    public virtual void HandleInput(Character character) 
-    {
-        
-    }
-    public virtual void LogicUpdate(Character character) 
-    {
-    
-    }
-    public virtual void UpdateState(Character character)
+
+    public virtual void Enter()
     {
 
     }
-    public virtual void PhysicsUpdateState(Character character) 
+
+    public virtual void Update() 
     {
     
     }
+    public virtual void Jump() 
+    {
+        
+    }
+    public virtual void Move() 
+    {
+    
+    }
+
 }

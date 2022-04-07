@@ -6,48 +6,50 @@ using UnityEngine;
 public class JumpState : State
 {
     private bool grounded;
-    private bool jump;
-    public override void Enter(Character character)
+
+    public JumpState(StateMachine stateMachine, Character character) : base(stateMachine, character)
+    {
+
+    }
+
+    public override void Enter()
     {
         grounded = false;
-        jump = Input.GetButtonDown("Jump");
-        character.JumpPlayer();
+        stateMachine.InputJump();
     }
 
-    public override void LogicUpdate(Character character)
+    public override void Update()
     {
-        if (grounded)
-        {
-            character.animator.SetBool("isJumping", false);
-            character.InitiaizeState(character.moveState);
-        }
         
-        else if (character.health == 0 || character.health < 0) 
-        {
-            character.InitiaizeState(character.dieState);
-        }
-    }
-
-    public override void UpdateState(Character character)
-    {
         if (character.rigidbody.velocity.y > 0)
         {
             Task task = new Task(async () =>
             {
-                await Task.Delay(40);
-                CheckGround(character);
+                await Task.Delay(30);
+                grounded = stateMachine.CheckGround();
             });
             task.Start();
         }
         else
         {
-            CheckGround(character);
+            grounded = stateMachine.CheckGround();
+        }
+
+        if (character.health == 0 || character.health < 0) 
+        {
+            stateMachine.InitializeState(character.dieState);
         }
 
     }
 
-    private void CheckGround(Character character)
+    public override void Move()
     {
-        grounded = character.CheckIsGrouded(character.boxCollider2D);
+        if (grounded)
+        {
+             character.animator.SetBool("isJumping", false);
+            stateMachine.InitializeState(character.moveState);
+        }
     }
+
+   
 }
