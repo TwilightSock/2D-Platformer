@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
 {
@@ -11,6 +11,8 @@ public class Character : MonoBehaviour
     public Animator animator { get; private set; }
     public Rigidbody2D rigidbody { get; private set; }
     public BoxCollider2D boxCollider2D { get; private set; }
+
+    private ResetScene resetScene;
     
     public float moveSpeed { get; } = 250.0f;
     public float jumpForce { get; } = 10.0f;
@@ -82,4 +84,16 @@ public class Character : MonoBehaviour
         currentState = state;
         state.Enter();
     }
+
+    public void SceneRestart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void OnEnable()
+    {
+        resetScene = animator.GetBehaviour<ResetScene>();
+        resetScene.OnActionRestart += stateMachine.SceneRestert;
+    }
+
 }

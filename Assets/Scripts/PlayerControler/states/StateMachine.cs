@@ -6,7 +6,7 @@ using UnityEngine;
 public class StateMachine
 { 
     private Character character;
-   
+    
     public StateMachine(Character character)
     {
         this.character = character;
@@ -33,5 +33,9 @@ public class StateMachine
         return character.CheckIsGrounded(character.boxCollider2D);
     }
 
+    public void SceneRestert()
+    {
+        character.SceneRestart();
+    }
 }
 
