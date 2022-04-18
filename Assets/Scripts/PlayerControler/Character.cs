@@ -17,56 +17,65 @@ public class Character : MonoBehaviour
     public float moveSpeed { get; } = 250.0f;
     public float jumpForce { get; } = 10.0f;
     public int health { get; set; } = 1;
-    #region
-    public State currentState { get; set; }
-    public StateMachine stateMachine { get; private set; }
+    #region States
 
-    public State moveState { get; private set; } 
-    public State jumpState { get; private set; } 
-    public State dieState { get; private set; } 
     #endregion
 
+    #region Animation Values
+
+    public int isJumping { get; set; } = Animator.StringToHash("isJumping");
+    public int isMoving { get; set; } = Animator.StringToHash("isMoving");
+    public int isDying { get; set; } = Animator.StringToHash("isDying");
+
+    #endregion
+    public 
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
-        stateMachine = new StateMachine(this);
-        moveState  = new MoveState(stateMachine,this);
-        jumpState  = new JumpState(stateMachine,this);
-        dieState  = new DieState(stateMachine,this);
-        currentState = moveState;
     }
 
     private void Update()
     {
-       currentState.Update();
-       currentState.Jump();
-       
+        JumpPlayer(); 
+        if (health <= 0)
+        {
+            invokeAnimation(isDying,true);
+        }
     }
 
     private void FixedUpdate()
     {
-        currentState.Move();
+        MovePlayer(Input.GetAxis("Horizontal"));
     }
 
     public void MovePlayer(float playerSpeed)
     {
-        bool isMoving = false;
+        bool move = false;
         if (!Mathf.Approximately(playerSpeed, 0))
         {
-            isMoving = true;
+            move = true;
             transform.localScale = new Vector3(Mathf.Sign(playerSpeed), 1, 1);
         }
         rigidbody.velocity = new Vector2(playerSpeed *moveSpeed* Time.deltaTime, rigidbody.velocity.y);
         
-        animator.SetBool("isMoving", isMoving);
+        invokeAnimation(isMoving, move);
     }
 
     public void JumpPlayer()
     {
-        rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        animator.SetBool("isJumping", true);
+        bool jump = !CheckIsGrounded(boxCollider2D);
+        if (Input.GetButtonDown("Jump") && CheckIsGrounded(boxCollider2D))
+        {
+            rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+        invokeAnimation(isJumping,jump);
+    }
+
+    public void invokeAnimation(int param,bool value)
+    {
+        animator.SetBool(param, value);
     }
 
     public bool CheckIsGrounded(BoxCollider2D boxCollider)
@@ -79,11 +88,11 @@ public class Character : MonoBehaviour
         return isGrounded;
     }
 
-    public void InitializeState(State state) 
-    {
-        currentState = state;
-        state.Enter();
-    }
+    // public void InitializeState(State state) 
+    // {
+    //     currentState = state;
+    //     state.Enter();
+    // }
 
     public void SceneRestart()
     {
@@ -93,7 +102,7 @@ public class Character : MonoBehaviour
     public void OnEnable()
     {
         resetScene = animator.GetBehaviour<ResetScene>();
-        resetScene.OnActionRestart += stateMachine.SceneRestert;
+        resetScene.OnActionRestart += SceneRestart;
     }
 
 }
