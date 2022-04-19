@@ -1,26 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Diagnostics.Contracts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
 {
+    #region LayerMask
     [SerializeField]
     private LayerMask jumpableGround;
+    #endregion
+
+    #region Character Attachments
     public Animator animator { get; private set; }
     public Rigidbody2D rigidbody { get; private set; }
     public BoxCollider2D boxCollider2D { get; private set; }
-
+    #endregion
+    #region GameControllers
     private ResetScene resetScene;
-    
+    [SerializeField]
+    private GameController gameController;
+    #endregion
+    #region Character values
     public float moveSpeed { get; } = 250.0f;
     public float jumpForce { get; } = 10.0f;
     public int health { get; set; } = 1;
+    public bool inAir { get; set; } = false;
+
     #region States
 
     #endregion
 
+    #endregion
     #region Animation Values
 
     public int isJumping { get; set; } = Animator.StringToHash("isJumping");
@@ -94,15 +106,16 @@ public class Character : MonoBehaviour
     //     state.Enter();
     // }
 
-    public void SceneRestart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
 
     public void OnEnable()
     {
         resetScene = animator.GetBehaviour<ResetScene>();
-        resetScene.OnActionRestart += SceneRestart;
+        gameController.SceneEditor(ref resetScene.onActionRestart); 
+       
     }
 
+    private void SceneRestart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }

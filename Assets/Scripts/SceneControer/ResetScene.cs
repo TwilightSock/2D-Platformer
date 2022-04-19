@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class ResetScene : StateMachineBehaviour
 {
-    public Action OnActionRestart;
+    public Action onActionRestart;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     /*override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -21,7 +21,7 @@ public class ResetScene : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        OnActionRestart();
+        onActionRestart();
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
