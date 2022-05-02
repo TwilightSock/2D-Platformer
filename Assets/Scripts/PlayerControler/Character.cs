@@ -27,6 +27,7 @@ public class Character : MonoBehaviour
     public float jumpForce { get; } = 10.0f;
     public int health { get; set; } = 1;
     public bool inAir { get; set; } = false;
+    public bool isDead { get; set; } = false;
 
     #region States
 
@@ -50,16 +51,24 @@ public class Character : MonoBehaviour
 
     private void Update()
     {
-        JumpPlayer(); 
+        if (!isDead)
+        {
+            JumpPlayer();
+        }
+
         if (health <= 0)
         {
+            isDead = true;
             invokeAnimation(isDying,true);
         }
     }
 
     private void FixedUpdate()
     {
-        MovePlayer(Input.GetAxis("Horizontal"));
+        if (!isDead)
+        {
+            MovePlayer(Input.GetAxis("Horizontal"));
+        }
     }
 
     public void MovePlayer(float playerSpeed)
@@ -114,8 +123,4 @@ public class Character : MonoBehaviour
        
     }
 
-    private void SceneRestart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
 }
