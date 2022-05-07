@@ -16,12 +16,9 @@ public class Character : MonoBehaviour
     public Animator animator { get; private set; }
     public Rigidbody2D rigidbody { get; private set; }
     public BoxCollider2D boxCollider2D { get; private set; }
+    public AnimatorListener animatorListener { get; private set; }
     #endregion
-    #region GameControllers
-    private ResetScene resetScene;
-    [SerializeField]
-    private GameController gameController;
-    #endregion
+
     #region Character values
     public float moveSpeed { get; } = 250.0f;
     public float jumpForce { get; } = 10.0f;
@@ -29,11 +26,14 @@ public class Character : MonoBehaviour
     public bool inAir { get; set; } = false;
     public bool isDead { get; set; } = false;
 
+    #endregion
+
     #region States
 
-    #endregion
+    
 
     #endregion
+
     #region Animation Values
 
     public int isJumping { get; set; } = Animator.StringToHash("isJumping");
@@ -41,8 +41,13 @@ public class Character : MonoBehaviour
     public int isDying { get; set; } = Animator.StringToHash("isDying");
 
     #endregion
-    public 
-    void Awake()
+
+    public void OnEnable()
+    {
+        animatorListener = animator.GetBehaviour<AnimatorListener>();
+    }
+
+    public void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
@@ -107,20 +112,6 @@ public class Character : MonoBehaviour
         bool isGrounded = boxCollider2D.GetContacts(contactFilter2D, contacts) > 0;
         Debug.Log($"Is grounded: {isGrounded}"); 
         return isGrounded;
-    }
-
-    // public void InitializeState(State state) 
-    // {
-    //     currentState = state;
-    //     state.Enter();
-    // }
-
-
-    public void OnEnable()
-    {
-        resetScene = animator.GetBehaviour<ResetScene>();
-        gameController.SceneEditor(ref resetScene.onActionRestart); 
-       
     }
 
 }

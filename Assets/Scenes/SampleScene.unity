@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 222236805}
   - component: {fileID: 222236807}
   - component: {fileID: 222236804}
+  - component: {fileID: 222236808}
   m_Layer: 6
   m_Name: Floor
   m_TagString: Untagged
@@ -2083,6 +2084,30 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &222236808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222236800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af9b6a8fe379b5d498b7d6d177d7f939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 260844938}
+--- !u!114 &260844938 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3780654110453327070, guid: 86958d3a90086944e9ca85d0fb319431, type: 3}
+  m_PrefabInstance: {fileID: 3780654109633822379}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8177d50984c63342848c6379402bcd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -4576,6 +4601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c23206cf552e0b4da229d18e4aff79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 260844938}
 --- !u!4 &1697536902
 Transform:
   m_ObjectHideFlags: 0

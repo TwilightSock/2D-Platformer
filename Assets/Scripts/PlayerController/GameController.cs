@@ -6,9 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    public void SceneEditor(ref Action onAction)
+    [SerializeField]
+    private Character character;
+
+    private void OnEnable()
     {
-        onAction += SceneRestart;
+        character.animatorListener.onActionRestart += SceneRestart;
     }
 
     private void SceneRestart()
