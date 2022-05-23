@@ -17,7 +17,7 @@ public class FallController : MonoBehaviour
     {
         if (character.transform.position.y < -3.5)
         {
-            character.health -= character.health;
+            character.LethalDamage = true;
         }
 
     }

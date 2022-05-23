@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
 
     private void OnEnable()
     {
-        character.animatorListener.onActionRestart += SceneRestart;
+        character.animatorListener.onAnimationEnd += SceneRestart;
     }
 
     private void SceneRestart()

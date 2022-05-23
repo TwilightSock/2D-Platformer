@@ -23,7 +23,7 @@ public class Character : MonoBehaviour
     public float moveSpeed { get; } = 250.0f;
     public float jumpForce { get; } = 10.0f;
     public int health { get; set; } = 1;
-    public bool inAir { get; set; } = false;
+    public bool LethalDamage { get; set; } = false;
     public bool isDead { get; set; } = false;
 
     #endregion
@@ -61,11 +61,7 @@ public class Character : MonoBehaviour
             JumpPlayer();
         }
 
-        if (health <= 0)
-        {
-            isDead = true;
-            invokeAnimation(isDying,true);
-        }
+        DiePlayer();
     }
 
     private void FixedUpdate()
@@ -97,6 +93,15 @@ public class Character : MonoBehaviour
             rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
         invokeAnimation(isJumping,jump);
+    }
+
+    public void DiePlayer()
+    {
+        if (health <= 0 || LethalDamage)
+        {
+            isDead = true;
+            invokeAnimation(isDying, true);
+        }
     }
 
     public void invokeAnimation(int param,bool value)
