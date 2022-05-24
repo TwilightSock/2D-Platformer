@@ -3,22 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FallController : MonoBehaviour
-{   
-    [SerializeField]
-    private Character character;
-    // Start is called before the first frame update
-    void Start()
+{
+    public void OnCollisionEnter2D(Collision2D collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (character.transform.position.y < -3.5)
+        Character character = collision.rigidbody.GetComponent<Character>();
+        if (character != null)
         {
-            character.LethalDamage = true;
+            character.outOfBounds = true;
         }
-
     }
+
 }

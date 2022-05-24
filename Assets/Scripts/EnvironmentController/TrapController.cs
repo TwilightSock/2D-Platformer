@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class TrapController : MonoBehaviour
 {
+    public int trapDamage { get; set; } = 1;
+
     public void OnCollisionEnter2D(Collision2D collision)
     {
         Character character = collision.rigidbody.GetComponent<Character>();
         if (character != null) 
         {
-            character.health -= character.health;
+            character.DoDamage(trapDamage);
         }
     }
 }

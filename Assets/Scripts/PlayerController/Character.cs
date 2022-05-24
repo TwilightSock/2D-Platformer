@@ -22,8 +22,8 @@ public class Character : MonoBehaviour
     #region Character values
     public float moveSpeed { get; } = 250.0f;
     public float jumpForce { get; } = 10.0f;
-    public int health { get; set; } = 1;
-    public bool LethalDamage { get; set; } = false;
+    private int health { get; set; } = 1;
+    public bool outOfBounds { get; set; } = false;
     public bool isDead { get; set; } = false;
 
     #endregion
@@ -95,9 +95,14 @@ public class Character : MonoBehaviour
         invokeAnimation(isJumping,jump);
     }
 
+    public void DoDamage(int damage)
+    {
+        health -= damage;
+    }
+
     public void DiePlayer()
     {
-        if (health <= 0 || LethalDamage)
+        if (health <= 0 || outOfBounds)
         {
             isDead = true;
             invokeAnimation(isDying, true);
