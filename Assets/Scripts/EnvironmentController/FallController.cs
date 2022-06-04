@@ -9,7 +9,7 @@ public class FallController : MonoBehaviour
         Character character = collision.rigidbody.GetComponent<Character>();
         if (character != null)
         {
-            character.outOfBounds = true;
+            character.OnFall();
         }
     }
 

@@ -138,7 +138,6 @@ GameObject:
   - component: {fileID: 222236805}
   - component: {fileID: 222236807}
   - component: {fileID: 222236804}
-  - component: {fileID: 222236808}
   m_Layer: 6
   m_Name: Floor
   m_TagString: Untagged
@@ -2084,19 +2083,6 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
---- !u!114 &222236808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 222236800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af9b6a8fe379b5d498b7d6d177d7f939, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  character: {fileID: 260844938}
 --- !u!114 &260844938 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3780654110453327070, guid: 86958d3a90086944e9ca85d0fb319431, type: 3}
@@ -3048,6 +3034,7 @@ Transform:
   - {fileID: 222236801}
   - {fileID: 596783254}
   - {fileID: 981032180}
+  - {fileID: 1073692385}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4572,6 +4559,72 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3780654110453327065, guid: 86958d3a90086944e9ca85d0fb319431, type: 3}
   m_PrefabInstance: {fileID: 3780654109633822379}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1073692384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1073692385}
+  - component: {fileID: 1073692387}
+  - component: {fileID: 1073692386}
+  m_Layer: 0
+  m_Name: Edge
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1073692385
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073692384}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 801536934}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1073692386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073692384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af9b6a8fe379b5d498b7d6d177d7f939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!68 &1073692387
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073692384}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -100, y: -5}
+  - {x: 100, y: -5}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &1697536900
 GameObject:
   m_ObjectHideFlags: 0

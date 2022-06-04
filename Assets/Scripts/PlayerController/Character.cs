@@ -23,7 +23,6 @@ public class Character : MonoBehaviour
     public float moveSpeed { get; } = 250.0f;
     public float jumpForce { get; } = 10.0f;
     private int health { get; set; } = 1;
-    public bool outOfBounds { get; set; } = false;
     public bool isDead { get; set; } = false;
 
     #endregion
@@ -102,13 +101,17 @@ public class Character : MonoBehaviour
 
     public void DiePlayer()
     {
-        if (health <= 0 || outOfBounds)
+        if (health <= 0)
         {
             isDead = true;
             invokeAnimation(isDying, true);
         }
     }
 
+    public void OnFall()
+    {
+        health = 0;
+    }
     public void invokeAnimation(int param,bool value)
     {
         animator.SetBool(param, value);
