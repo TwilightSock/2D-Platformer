@@ -8,7 +8,23 @@ public class GameController : MonoBehaviour
 {
     [SerializeField]
     private Character character;
+    private void Update()
+    {
+        if (!character.isDead)
+        {
+            character.JumpPlayer(Input.GetButtonDown("Jump"));
+        }
 
+        character.DiePlayer();
+    }
+
+    private void FixedUpdate()
+    {
+        if (!character.isDead)
+        {
+            character.MovePlayer(Input.GetAxis("Horizontal"));
+        }
+    }
     private void OnEnable()
     {
         character.animatorListener.onAnimationEnd += SceneRestart;

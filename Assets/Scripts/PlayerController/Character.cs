@@ -53,24 +53,6 @@ public class Character : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    private void Update()
-    {
-        if (!isDead)
-        {
-            JumpPlayer();
-        }
-
-        DiePlayer();
-    }
-
-    private void FixedUpdate()
-    {
-        if (!isDead)
-        {
-            MovePlayer(Input.GetAxis("Horizontal"));
-        }
-    }
-
     public void MovePlayer(float playerSpeed)
     {
         bool move = false;
@@ -84,10 +66,10 @@ public class Character : MonoBehaviour
         invokeAnimation(isMoving, move);
     }
 
-    public void JumpPlayer()
+    public void JumpPlayer(bool playerJump)
     {
         bool jump = !CheckIsGrounded(boxCollider2D);
-        if (Input.GetButtonDown("Jump") && CheckIsGrounded(boxCollider2D))
+        if (playerJump && CheckIsGrounded(boxCollider2D))
         {
             rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
