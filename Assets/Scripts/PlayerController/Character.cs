@@ -23,13 +23,19 @@ public class Character : MonoBehaviour
     public float moveSpeed { get; } = 250.0f;
     public float jumpForce { get; } = 10.0f;
     private int health { get; set; } = 1;
+    public int coinsCollected { get; set; } = 0;
     public bool isDead { get; set; } = false;
 
     #endregion
 
+    #region Sounds
+    [SerializeField] private AudioSource deathSound;
+    [SerializeField] private AudioSource jumpSound;
+    private bool deathSoundPlayed = false;
+    #endregion
     #region States
 
-    
+
 
     #endregion
 
@@ -62,7 +68,6 @@ public class Character : MonoBehaviour
             transform.localScale = new Vector3(Mathf.Sign(playerSpeed), 1, 1);
         }
         rigidbody.velocity = new Vector2(playerSpeed *moveSpeed* Time.deltaTime, rigidbody.velocity.y);
-        
         invokeAnimation(isMoving, move);
     }
 
@@ -72,6 +77,7 @@ public class Character : MonoBehaviour
         if (playerJump && CheckIsGrounded(boxCollider2D))
         {
             rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            jumpSound.Play();
         }
         invokeAnimation(isJumping,jump);
     }
@@ -86,6 +92,11 @@ public class Character : MonoBehaviour
         if (health <= 0)
         {
             isDead = true;
+            if (!deathSoundPlayed)
+            {
+                deathSound.Play();
+                deathSoundPlayed = true;
+            }
             invokeAnimation(isDying, true);
         }
     }
@@ -94,6 +105,12 @@ public class Character : MonoBehaviour
     {
         health = 0;
     }
+
+    public void OnCollectItem()
+    {
+        coinsCollected += 1;
+    }
+
     public void invokeAnimation(int param,bool value)
     {
         animator.SetBool(param, value);
