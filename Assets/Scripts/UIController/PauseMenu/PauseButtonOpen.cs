@@ -6,10 +6,10 @@ public class PauseButtonOpen : MonoBehaviour
 {
     [SerializeField] private AudioSource clickSound;
     [SerializeField]
-    private GameObject pauseMenu;
+    private GameObject menu;
     public void OnOpen()
     {
         clickSound.Play();
-        pauseMenu.SetActive(true);
+        menu.SetActive(true);
     }
 }

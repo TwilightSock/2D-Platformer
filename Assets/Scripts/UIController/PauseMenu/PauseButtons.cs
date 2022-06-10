@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 public class PauseButtons : MonoBehaviour
 {
     [SerializeField] private AudioSource clickSound;
-    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject menu;
 
     public void OnClose()
     {
         AudioSource.PlayClipAtPoint(clickSound.clip,transform.position);
-        pauseMenu.SetActive(false);
+        menu.SetActive(false);
     }
 
     public void OnQuit()

@@ -5,7 +5,7 @@ using UnityEngine;
 public class EndLevelController : MonoBehaviour
 {
     [SerializeField] private AudioSource finishSound;
-    private bool levelCompleted = false;
+    public bool levelCompleted { get; private set; } = false;
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -13,13 +13,8 @@ public class EndLevelController : MonoBehaviour
         {
             finishSound.Play();
             levelCompleted = true;
-            OnLevelComplete();
 
         }
     }
 
-    private void OnLevelComplete()
-    {
-
-    }
 }
