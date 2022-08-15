@@ -101,6 +101,10 @@ public class Character : MonoBehaviour
         }
     }
 
+    public void FreezePlayer() 
+    {
+        rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+    }
     public void OnFall()
     {
         health = 0;

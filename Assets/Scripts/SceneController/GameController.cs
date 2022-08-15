@@ -13,39 +13,42 @@ public class GameController : MonoBehaviour
     [SerializeField] private EndLevelController endLevel;
     [SerializeField] private Result result;
     [SerializeField] private TMP_Text text;
-    [SerializeField]
-    private Timer timer;
-
+    [SerializeField] private Timer timer;
     [SerializeField] private TMP_Text timerText;
+    [SerializeField] private GameObject popup;
     private void Update()
     {
-        if (!character.isDead)
+        if (!character.isDead & !popup.activeSelf)
         {
             character.JumpPlayer(Input.GetButtonDown("Jump"));
         }
 
         character.DiePlayer();
         OutputCoins();
-        Timer();
+        if (!popup.activeSelf)
+        {
+            Timer();
+        }
         GameStatus();
     }
 
     private void FixedUpdate()
     {
-        if (!character.isDead)
+        if (!character.isDead & !popup.activeSelf)
         {
             character.MovePlayer(Input.GetAxis("Horizontal"));
         }
     }
+
     private void OnEnable()
     {
-        character.animatorListener.onAnimationEnd += SceneRestart;
+        /*character.animatorListener.onAnimationEnd += SceneRestart;*/
     }
 
-    private void SceneRestart()
+    /*private void SceneRestart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+    }*/
 
     private void OutputCoins()
     {
@@ -69,5 +72,9 @@ public class GameController : MonoBehaviour
             result.SetDefeat();
         }
 
+        if (popup.activeSelf) 
+        {
+            character.FreezePlayer();
+        }
     }
 }

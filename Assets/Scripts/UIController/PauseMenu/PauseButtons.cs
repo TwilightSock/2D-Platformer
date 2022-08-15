@@ -25,4 +25,10 @@ public class PauseButtons : MonoBehaviour
         clickSound.Play();
     }
 
+    public void OnRestart()
+    {
+        clickSound.Play();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 }
