@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour
         {
             Timer();
         }
-        GameStatus();
+        
     }
 
     private void FixedUpdate()
@@ -43,6 +43,9 @@ public class GameController : MonoBehaviour
     private void OnEnable()
     {
         /*character.animatorListener.onAnimationEnd += SceneRestart;*/
+        timer.onTimerEnd += GameEnd;
+        character.onCharacterDeath += GameEnd;
+        endLevel.onLevelComplete += GameEnd;
     }
 
     /*private void SceneRestart()
@@ -60,21 +63,13 @@ public class GameController : MonoBehaviour
         timerText.SetText(timer.GetTime());
     }
 
-    private void GameStatus()
+    private void GameEnd(Result.State state) 
     {
-        if (endLevel.levelCompleted)
-        {
-            result.SetVictory();
-        }
-
-        if (character.isDead || !timer.timerOn)
-        {
-            result.SetDefeat();
-        }
-
-        if (popup.activeSelf) 
+        result.SetState(state);
+        if (popup.activeSelf)
         {
             character.FreezePlayer();
         }
     }
+
 }

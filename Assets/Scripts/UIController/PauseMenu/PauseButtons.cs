@@ -10,7 +10,7 @@ public class PauseButtons : MonoBehaviour
 
     public void OnClose()
     {
-        AudioSource.PlayClipAtPoint(clickSound.clip,transform.position);
+        clickSound.Play();
         menu.SetActive(false);
     }
 

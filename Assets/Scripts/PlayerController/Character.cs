@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Diagnostics.Contracts;
@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
 {
+    #region
+    public Action<Result.State> onCharacterDeath;
+    #endregion
     #region LayerMask
     [SerializeField]
     private LayerMask jumpableGround;
@@ -32,11 +35,6 @@ public class Character : MonoBehaviour
     [SerializeField] private AudioSource deathSound;
     [SerializeField] private AudioSource jumpSound;
     private bool deathSoundPlayed = false;
-    #endregion
-    #region States
-
-
-
     #endregion
 
     #region Animation Values
@@ -98,7 +96,9 @@ public class Character : MonoBehaviour
                 deathSoundPlayed = true;
             }
             invokeAnimation(isDying, true);
+            onCharacterDeath(Result.State.Defeat);
         }
+ 
     }
 
     public void FreezePlayer() 
