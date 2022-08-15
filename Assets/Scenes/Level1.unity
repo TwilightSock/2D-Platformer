@@ -3937,7 +3937,7 @@ GameObject:
   - component: {fileID: 734490523}
   m_Layer: 0
   m_Name: Popup
-  m_TagString: Untagged
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7543,7 +7543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f815c20436232e14fb78e1b45b97c341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLeft: 15
+  timeLeft: 11
 --- !u!1 &2124605894
 GameObject:
   m_ObjectHideFlags: 0
