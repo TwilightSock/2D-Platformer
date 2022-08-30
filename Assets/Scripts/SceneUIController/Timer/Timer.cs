@@ -6,9 +6,10 @@ using UnityEngine;
 public class Timer : MonoBehaviour
 {
 
-    public Action<Result.State> onTimerEnd;
-    public float timeLeft;
-    public bool timerOn { get; private set; } = false;
+    public Action<ResultPopup.State> onTimerEnd;
+    
+    [SerializeField]private  float timeLeft;
+    public bool timerOn { get; set; } = false;
 
     private void Start()
     {
@@ -28,7 +29,7 @@ public class Timer : MonoBehaviour
             {
                 timeLeft = 0;
                 timerOn = false;
-                onTimerEnd(Result.State.Defeat);
+                onTimerEnd(ResultPopup.State.Defeat);
                               
             }
         }

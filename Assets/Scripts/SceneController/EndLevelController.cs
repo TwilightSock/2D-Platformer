@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EndLevelController : MonoBehaviour
 {
-    public Action<Result.State> onLevelComplete;
+    public Action<ResultPopup.State> onLevelComplete;
     [SerializeField] private AudioSource finishSound;
     public bool levelCompleted { get; private set; } = false;
 
@@ -14,7 +14,7 @@ public class EndLevelController : MonoBehaviour
         {
             finishSound.Play();
             levelCompleted = true;
-            onLevelComplete(Result.State.Victory);
+            onLevelComplete(ResultPopup.State.Victory);
         }
     }
 

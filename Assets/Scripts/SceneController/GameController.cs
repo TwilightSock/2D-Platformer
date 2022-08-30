@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
     private Character character;
 
     [SerializeField] private EndLevelController endLevel;
-    [SerializeField] private Result result;
+    [SerializeField] private ResultPopup resultPopup;
     [SerializeField] private TMP_Text text;
     [SerializeField] private Timer timer;
     [SerializeField] private TMP_Text timerText;
@@ -25,11 +25,8 @@ public class GameController : MonoBehaviour
 
         character.DiePlayer();
         OutputCoins();
-        if (!popup.activeSelf)
-        {
-            Timer();
-        }
-        
+        Timer();
+       
     }
 
     private void FixedUpdate()
@@ -43,15 +40,16 @@ public class GameController : MonoBehaviour
     private void OnEnable()
     {
         /*character.animatorListener.onAnimationEnd += SceneRestart;*/
+        popup.GetComponent<ResultPopup>().onPopupClose += SceneRestart;
         timer.onTimerEnd += GameEnd;
         character.onCharacterDeath += GameEnd;
         endLevel.onLevelComplete += GameEnd;
     }
 
-    /*private void SceneRestart()
+    private void SceneRestart(int BuildIndex)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }*/
+        SceneManager.LoadScene(BuildIndex);
+    }
 
     private void OutputCoins()
     {
@@ -60,16 +58,23 @@ public class GameController : MonoBehaviour
 
     private void Timer()
     {
-        timerText.SetText(timer.GetTime());
+        if (popup.activeSelf | resultPopup.gameObject.activeSelf )
+        {
+            timer.timerOn = false;
+        }
+        else 
+        {
+            timer.timerOn = true;
+            timerText.SetText(timer.GetTime());
+        }
+        
     }
 
-    private void GameEnd(Result.State state) 
+    private void GameEnd(ResultPopup.State state) 
     {
-        result.SetState(state);
-        if (popup.activeSelf)
-        {
-            character.FreezePlayer();
-        }
+        character.FreezePlayer();        
+        resultPopup.Show(state, SceneRestart);
+        
     }
 
 }

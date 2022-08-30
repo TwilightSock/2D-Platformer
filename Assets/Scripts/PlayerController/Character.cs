@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class Character : MonoBehaviour
 {
     #region
-    public Action<Result.State> onCharacterDeath;
+    public Action<ResultPopup.State> onCharacterDeath;
     #endregion
     #region LayerMask
     [SerializeField]
@@ -96,7 +96,7 @@ public class Character : MonoBehaviour
                 deathSoundPlayed = true;
             }
             invokeAnimation(isDying, true);
-            onCharacterDeath(Result.State.Defeat);
+            onCharacterDeath(ResultPopup.State.Defeat);
         }
  
     }

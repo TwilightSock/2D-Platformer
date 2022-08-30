@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5468163322291532877}
   - component: {fileID: 3965812446576378261}
   - component: {fileID: 5850501221935235690}
-  - component: {fileID: 8127572790409931369}
+  - component: {fileID: 3007942377601960735}
   - component: {fileID: 6834939573518886308}
   m_Layer: 0
   m_Name: Button
@@ -31,6 +31,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 858841680327563248}
   m_Father: {fileID: 0}
@@ -92,7 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -123,19 +124,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1196448320237302667}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 3007942377601960735}
+        m_TargetAssemblyTypeName: ResultPopup, Assembly-CSharp
+        m_MethodName: OnSettings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &8127572790409931369
+--- !u!114 &3007942377601960735
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,11 +145,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1196448320237302667}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d13dfda068440b54d93ee144f1a3126e, type: 3}
+  m_Script: {fileID: 11500000, guid: 463fe5b6a3640d148b6ff2f66618c8d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resultText: {fileID: 0}
   clickSound: {fileID: 6834939573518886308}
-  pauseMenu: {fileID: 0}
+  menu: {fileID: 0}
 --- !u!82 &6834939573518886308
 AudioSource:
   m_ObjectHideFlags: 0
@@ -273,6 +275,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7959783422290207438}
   m_RootOrder: 0
