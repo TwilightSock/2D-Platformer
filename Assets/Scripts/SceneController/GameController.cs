@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using GoogleMobileAds.Api;
 
 public class GameController : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class GameController : MonoBehaviour
     [SerializeField] private Timer timer;
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private GameObject popup;
+
+    [SerializeField] private AdMobScript advert;
+
     private void Update()
     {
         if (!character.isDead & !popup.activeSelf)
@@ -41,6 +45,7 @@ public class GameController : MonoBehaviour
     {
         /*character.animatorListener.onAnimationEnd += SceneRestart;*/
         popup.GetComponent<ResultPopup>().onPopupClose += SceneRestart;
+        resultPopup.GetComponent<ResultPopup>().onPopupClose += SceneRestart;
         timer.onTimerEnd += GameEnd;
         character.onCharacterDeath += GameEnd;
         endLevel.onLevelComplete += GameEnd;
@@ -73,7 +78,13 @@ public class GameController : MonoBehaviour
     private void GameEnd(ResultPopup.State state) 
     {
         character.FreezePlayer();        
-        resultPopup.Show(state, SceneRestart);
+        resultPopup.Show(state, () => 
+        {
+            if (advert.interstitialAd.IsLoaded())
+            {
+                advert.interstitialAd.Show();
+            }
+        });
         
     }
 

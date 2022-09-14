@@ -42,10 +42,10 @@ public class ResultPopup : MonoBehaviour
     }
 
 
-    public void Show(State state,Action<int> onPopupClose)
+    public void Show(State state,Action onPopupClose)
     {
         gameObject.SetActive(true);
-        this.onPopupClose += onPopupClose;
+       // this.onPopupClose += onPopupClose;
         resultText.SetText(state.ToString());
 
         if (state.Equals(State.Victory))
@@ -57,6 +57,6 @@ public class ResultPopup : MonoBehaviour
         {
             resultText.color = Color.red;
         }
-
+        onPopupClose();
     }
 }
