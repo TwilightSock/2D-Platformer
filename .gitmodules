@@ -1,6 +1,3 @@
-[submodule "Packages/Packages"]
-	path = Packages/Packages
-	url = https://bitbucket.org/mithrilmobile/mithril-unity-kit.git
 [submodule "Packages/juice-kit"]
 	path = Packages/juice-kit
 	url = https://bitbucket.org/mithrilmobile/mithril-unity-kit.git

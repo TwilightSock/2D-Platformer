@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Template.UIElements;
 
 public class Timer : MonoBehaviour
 {
 
-    public Action<ResultPopup.State> onTimerEnd;
+    public Action<ResultPopupUIE.State> onTimerEnd;
     
     [SerializeField]private  float timeLeft;
     public bool timerOn { get; set; } = false;
@@ -29,7 +30,7 @@ public class Timer : MonoBehaviour
             {
                 timeLeft = 0;
                 timerOn = false;
-                onTimerEnd(ResultPopup.State.Defeat);
+                onTimerEnd(ResultPopupUIE.State.Defeat);
                               
             }
         }

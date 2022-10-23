@@ -4,11 +4,12 @@ using System.ComponentModel.Design;
 using System.Diagnostics.Contracts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Template.UIElements;
 
 public class Character : MonoBehaviour
 {
     #region
-    public Action<ResultPopup.State> onCharacterDeath;
+    public Action<ResultPopupUIE.State> onCharacterDeath;
     #endregion
     #region LayerMask
     [SerializeField]
@@ -96,7 +97,7 @@ public class Character : MonoBehaviour
                 deathSoundPlayed = true;
             }
             invokeAnimation(isDying, true);
-            onCharacterDeath(ResultPopup.State.Defeat);
+            onCharacterDeath(ResultPopupUIE.State.Defeat);
         }
  
     }

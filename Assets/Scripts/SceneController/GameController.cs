@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Template.UIElements;
 using GoogleMobileAds.Api;
 
 public class GameController : MonoBehaviour
@@ -12,7 +13,7 @@ public class GameController : MonoBehaviour
     private Character character;
 
     [SerializeField] private EndLevelController endLevel;
-    [SerializeField] private ResultPopup resultPopup;
+    [SerializeField] private ResultPopupUIE resultPopup;
     [SerializeField] private TMP_Text text;
     [SerializeField] private Timer timer;
     [SerializeField] private TMP_Text timerText;
@@ -44,8 +45,7 @@ public class GameController : MonoBehaviour
     private void OnEnable()
     {
         /*character.animatorListener.onAnimationEnd += SceneRestart;*/
-        popup.GetComponent<ResultPopup>().onPopupClose += SceneRestart;
-        resultPopup.GetComponent<ResultPopup>().onPopupClose += SceneRestart;
+        resultPopup.GetComponent<ResultPopupUIE>().onPopupClose = SceneRestart;
         timer.onTimerEnd += GameEnd;
         character.onCharacterDeath += GameEnd;
         endLevel.onLevelComplete += GameEnd;
@@ -75,7 +75,7 @@ public class GameController : MonoBehaviour
         
     }
 
-    private void GameEnd(ResultPopup.State state) 
+    private void GameEnd(ResultPopupUIE.State state) 
     {
         character.FreezePlayer();        
         resultPopup.Show(state, () => 

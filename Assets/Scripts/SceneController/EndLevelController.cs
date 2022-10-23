@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Template.UIElements;
 public class EndLevelController : MonoBehaviour
 {
-    public Action<ResultPopup.State> onLevelComplete;
+    public Action<ResultPopupUIE.State> onLevelComplete;
     [SerializeField] private AudioSource finishSound;
     public bool levelCompleted { get; private set; } = false;
 
@@ -14,7 +14,7 @@ public class EndLevelController : MonoBehaviour
         {
             finishSound.Play();
             levelCompleted = true;
-            onLevelComplete(ResultPopup.State.Victory);
+            onLevelComplete(ResultPopupUIE.State.Victory);
         }
     }
 
