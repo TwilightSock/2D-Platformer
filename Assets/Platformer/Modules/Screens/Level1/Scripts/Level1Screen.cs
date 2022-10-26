@@ -11,7 +11,7 @@ namespace Template.Screens.Level1
         public const string Exit_Quit = "Exit_Quit";
         public const string Exit_Restart = "Exit_Restart";
         [SerializeField]
-        private PopupUIE popupUIE;
+        private GameObject popupUI;
         public void OnQuitPressed()
         {
             Exit(Exit_Quit);
@@ -27,9 +27,9 @@ namespace Template.Screens.Level1
             
         }
 
-        public void OnSwitchPopupPressed() 
-        {
-            popupUIE.gameObject.SetActive(!popupUIE.gameObject.activeSelf);
+        public void OnSwitchPopupPressed()
+        {           
+            popupUI.SetActive(!popupUI.activeSelf);
         }
     }
 }

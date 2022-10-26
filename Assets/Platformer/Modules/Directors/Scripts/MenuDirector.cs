@@ -22,11 +22,11 @@ namespace Template.Directors
         {
             if (_exitCode == MenuScreen.Exit_Play)
             {
-                SceneManager.LoadScene(ScenesIds.Level1);
+                LoadScene(ScenesIds.Level1);
             }
             else if (_exitCode == MenuScreen.Exit_Settings)
             {
-                //ToScreen<SettingsScreen>();
+                ToScreen<SettingsScreen>();
             }
             else if (_exitCode == MenuScreen.Exit_Quit)
             {

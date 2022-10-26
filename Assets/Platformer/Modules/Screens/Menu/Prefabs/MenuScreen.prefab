@@ -291,19 +291,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50dbf6a350ee2e44fa2fa24f24991d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &7592600120409693882 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6792392480709493772, guid: 0d3397d519bcaa640afde449d4b33f17, type: 3}
-  m_PrefabInstance: {fileID: 3971393583254264502}
-  m_PrefabAsset: {fileID: 0}
---- !u!81 &6147836222241208018
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7592600120409693882}
-  m_Enabled: 1
 --- !u!1001 &4495308020087388961
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -662,7 +649,7 @@ PrefabInstance:
     - target: {fileID: 5045392100950075765, guid: 71d504e46e1b2204f964e0dcc273508e, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2196644310297313593}
+      objectReference: {fileID: 0}
     - target: {fileID: 5045392100950075765, guid: 71d504e46e1b2204f964e0dcc273508e, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnMouseEnter
@@ -681,17 +668,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71d504e46e1b2204f964e0dcc273508e, type: 3}
---- !u!114 &2196644310297313593 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6527179301900526405, guid: 71d504e46e1b2204f964e0dcc273508e, type: 3}
-  m_PrefabInstance: {fileID: 4965568932849623676}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e718a22ec0eb164d9d8580ba90e98b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &4914104550485738019 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 61738332855656543, guid: 71d504e46e1b2204f964e0dcc273508e, type: 3}

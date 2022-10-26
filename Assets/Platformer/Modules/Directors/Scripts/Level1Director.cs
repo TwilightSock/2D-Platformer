@@ -11,7 +11,6 @@ namespace Template.Directors
             base.Start();
 
             AddExitAction<Level1Screen>(OnGameScreenExit);
-          //  AddExitAction<Level1UiScreen>(OnGameScreenExit);
 
             SetCurrentScreen<Level1Screen>().Show();
         }
