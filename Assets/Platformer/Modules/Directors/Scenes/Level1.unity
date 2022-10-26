@@ -2201,17 +2201,6 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
---- !u!114 &235562527 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 235562527, guid: 4c031ba24067a9c4b9839cd1f632c888, type: 3}
-  m_PrefabInstance: {fileID: 1619217617}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 251bc06b55436c549b5db3e1ee09fe79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &263177497
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5331,6 +5320,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level1Screen
       objectReference: {fileID: 0}
+    - target: {fileID: 1595464258159843401, guid: 4c031ba24067a9c4b9839cd1f632c888, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9221514845800325887, guid: 4c031ba24067a9c4b9839cd1f632c888, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -5460,7 +5453,7 @@ MonoBehaviour:
   endLevel: {fileID: 3758460483470436218}
   resultPopup: {fileID: 1619217619}
   coinText: {fileID: 1795481943}
-  timer: {fileID: 235562527}
+  timer: {fileID: 1912774524}
   timerText: {fileID: 1228062449}
   popup: {fileID: 266358806}
   advert: {fileID: 1697536903}
@@ -5574,6 +5567,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8822030793719302479, guid: ff62651cbd2f0ed4eaf43ecace9e254f, type: 3}
   m_PrefabInstance: {fileID: 17785728}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1912774523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1912774525}
+  - component: {fileID: 1912774524}
+  m_Layer: 0
+  m_Name: TimerObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1912774524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912774523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 251bc06b55436c549b5db3e1ee09fe79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerName: TimeToLose
+--- !u!4 &1912774525
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912774523}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 79.95527, y: 211.07867, z: -7.9554834}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1971531824
 GameObject:
   m_ObjectHideFlags: 0

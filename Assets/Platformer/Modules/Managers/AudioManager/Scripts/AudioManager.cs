@@ -12,32 +12,15 @@ namespace Template.Managers
         [SerializeField]
         private AudioMixer audioMixer;
 
-        private const string MainMenuMusic = "MainMenuMusic";
-        private const string MenuSounds = "MenuSounds";
+        public static readonly string MainMenuMusic = "MainMenuMusic";
+        public static readonly string MenuSounds = "MenuSounds";
+        public static readonly string GameMenuSounds = "GameMenuSounds";
+        public static readonly string GameSounds = "GameSounds";
 
-       
-        public void ChangeMainMenuMusicState(bool state) 
+        public AudioMixer GetAudioMixer 
         {
-            if (state)
-            {
-                audioMixer.SetFloat(MainMenuMusic, 0f);
-            }
-            else 
-            {
-                audioMixer.SetFloat(MainMenuMusic, -80f);
-            }
+            get { return audioMixer; }
         }
-
-        public void ChangeMenuSounds(bool state) 
-        {
-            if (state)
-            {
-                audioMixer.SetFloat(MenuSounds, 0f);
-            }
-            else
-            {
-                audioMixer.SetFloat(MenuSounds, -80f);
-            }
-        }
+        
     }
 }
