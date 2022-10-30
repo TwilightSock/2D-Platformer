@@ -1,8 +1,8 @@
 using JuiceKit;
-using Template.Screens.Level1;
+using Platformer.Screens.Game;
 using UnityEngine.SceneManagement;
 
-namespace Template.Directors
+namespace Platformer.Directors
 {
     public class Level1Director : SceneDirector
     {
@@ -10,18 +10,18 @@ namespace Template.Directors
         {
             base.Start();
 
-            AddExitAction<Level1Screen>(OnGameScreenExit);
+            AddExitAction<GameScreen>(OnGameScreenExit);
 
-            SetCurrentScreen<Level1Screen>().Show();
+            SetCurrentScreen<GameScreen>().Show();
         }
 
         void OnGameScreenExit(string _exitCode)
         {
-            if (_exitCode == Level1Screen.Exit_Quit)
+            if (_exitCode == GameScreen.Exit_Quit)
             {
                 SceneManager.LoadScene(ScenesIds.Menu);
             }
-            else if (_exitCode == Level1Screen.Exit_Restart) 
+            else if (_exitCode == GameScreen.Exit_Restart) 
             {
                 SceneManager.LoadScene(ScenesIds.Level1);
             }

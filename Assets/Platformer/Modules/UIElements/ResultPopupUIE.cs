@@ -5,11 +5,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace Template.UIElements
+namespace Platformer.UIElements
 {
     public class ResultPopupUIE : UIElement
     {
-        public Action<int> onPopupClose;
         [SerializeField]
         private TMP_Text resultText;
 

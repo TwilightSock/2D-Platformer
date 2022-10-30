@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using JuiceKit;
 
-namespace Template.Elements
+namespace Platformer.Elements
 {
     public class EndLevelElement : Element
     {

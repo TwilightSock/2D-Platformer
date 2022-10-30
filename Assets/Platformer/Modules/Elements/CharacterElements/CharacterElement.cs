@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Template.Elements
+namespace Platformer.Elements
 {
     public class CharacterElement : Element
     {
@@ -101,15 +101,6 @@ namespace Template.Elements
 
         }
 
-        public void FreezePlayer()
-        {
-            rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
-        }
-
-        public void UnfreezePlayer() 
-        {
-            rigidbody.constraints = RigidbodyConstraints2D.None;
-        }
         public void OnFall()
         {
             health = 0;

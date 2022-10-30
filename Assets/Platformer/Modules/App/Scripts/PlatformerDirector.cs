@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Template.App
+namespace Platformer.App
 {
     public class PlatformerDirector : AppDirector
     {

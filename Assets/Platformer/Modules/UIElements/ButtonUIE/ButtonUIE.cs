@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using JuiceKit;
 
-namespace Template.UIElements
+namespace Platformer.UIElements
 {
     public class ButtonUIE : UIElement
     {

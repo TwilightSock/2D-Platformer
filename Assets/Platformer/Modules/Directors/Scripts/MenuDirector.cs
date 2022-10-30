@@ -1,10 +1,10 @@
 using JuiceKit;
-using Template.Screens.Menu;
-using Template.Screens.Settings;
+using Platformer.Screens.Menu;
+using Platformer.Screens.Settings;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Template.Directors
+namespace Platformer.Directors
 {
     public class MenuDirector : SceneDirector
     {
